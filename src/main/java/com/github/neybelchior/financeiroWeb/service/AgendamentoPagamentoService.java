@@ -10,12 +10,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.github.neybelchior.financeiroWeb.model.AgendamentoPagamento;
+import com.github.neybelchior.financeiroWeb.model.LoggingInterceptor;
+
+import jakarta.annotation.PostConstruct;
 
 @Service
 public class AgendamentoPagamentoService {
 	
 	@Autowired
 	private  RestTemplate restTemplate;
+	
+	@PostConstruct
+	public void init() {
+	    restTemplate.getInterceptors().add(new LoggingInterceptor());
+	}
+
 
 	public List<AgendamentoPagamento> findAll() {
         String url = "http://localhost:8080/agendamentos/todos";
@@ -27,4 +36,13 @@ public class AgendamentoPagamentoService {
         );
         return response.getBody();
     }
+	
+	
+	public AgendamentoPagamento create(AgendamentoPagamento agendamentoPagamento) {
+		System.out.println("AgendamentoPagamentoService.create" + agendamentoPagamento);
+	    String url = "http://localhost:8080/agendamentos";
+	    System.out.println("Objeto Criado  ");
+	    System.out.println(agendamentoPagamento);
+	    return restTemplate.postForObject(url, agendamentoPagamento, AgendamentoPagamento.class);
+	}
 }

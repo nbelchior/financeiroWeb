@@ -2,16 +2,25 @@ package com.github.neybelchior.financeiroWeb.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AgendamentoPagamento {
 
     private int codigo;
     private String descricao;
-    private LocalDate dataDeAgendamento;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dataDeAgendamento;
     private String tipo;
     private BigDecimal valor;
-    private LocalDate dataDeVencimento;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dataDeVencimento;
     private String agencia;
     private String conta;
     private String tipoDeConta;
@@ -37,11 +46,11 @@ public class AgendamentoPagamento {
         this.descricao = descricao;
     }
 
-    public LocalDate getDataDeAgendamento() {
+    public Date getDataDeAgendamento() {
         return dataDeAgendamento;
     }
 
-    public void setDataDeAgendamento(LocalDate dataDeAgendamento) {
+    public void setDataDeAgendamento(Date dataDeAgendamento) {
         this.dataDeAgendamento = dataDeAgendamento;
     }
 
@@ -61,11 +70,11 @@ public class AgendamentoPagamento {
         this.valor = valor;
     }
 
-    public LocalDate getDataDeVencimento() {
+    public Date getDataDeVencimento() {
         return dataDeVencimento;
     }
 
-    public void setDataDeVencimento(LocalDate dataDeVencimento) {
+    public void setDataDeVencimento(Date dataDeVencimento) {
         this.dataDeVencimento = dataDeVencimento;
     }
 
